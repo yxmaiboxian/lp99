@@ -6,7 +6,7 @@
     <div v-if="show">
       <div class="box" v-for="(item, index) in imgLength" :key="item" :style="computedStyle(item)">
         <img :style="{ 'animation-duration': computedDuration(item), 'animation-delay': 1 * index + 's' }"
-          class="box-img" :src="require(`@/assets/imgs/img (${item}).jpg`)" alt="">
+          class="box-img" :src="require(`@/assets/imgs/img2 (${item}).jpg`)" alt="">
       </div>
     </div>
 
@@ -18,7 +18,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      imgLength: 100,
+      imgLength: 93,
       show: false
     }
   },
@@ -81,7 +81,7 @@ export default {
   .box {
     position: fixed;
     transform-style: preserve-3d;
-    width: 240px;
+    width: 300px;
 
     &-img {
       opacity: 0;
@@ -113,7 +113,7 @@ export default {
       color: black;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('@/assets/imgs/img (7).jpg');
+      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('@/assets/imgs/img2 (26).jpg');
       background-repeat: no-repeat;
       filter: blur(1px);
       background-position: center center;

@@ -6,7 +6,7 @@
     <div v-if="show">
       <audio src="@/assets/music/audio.mp3" autoplay loop></audio>
       <div class="box" v-for="(item, index) in imgLength" :key="item" :style="computedStyle(item)">
-        <img :style="{ 'animation-duration': computedDuration(item), 'animation-delay': 1 * index + 's' }"
+        <img :style="{ 'animation-duration': computedDuration(item), 'animation-delay': 1.5 * index + 's' }"
           class="box-img" :src="require(`@/assets/imgs/img2 (${item}).jpg`)" alt="">
       </div>
     </div>
@@ -27,9 +27,9 @@ export default {
     computedDuration() {
       return (item) => {
         let flag = Math.random()
-        let num = 0.5
+        let num = 15
         if (flag > 0.3) {
-          num = flag * 5
+          num = flag * 15
         }
         return num + 's'
       }
@@ -64,7 +64,7 @@ export default {
       transform: scale(.05);
     }
 
-    75% {
+    70% {
       opacity: 0.9
     }
 

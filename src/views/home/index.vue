@@ -4,6 +4,7 @@
       全球热恋
     </div>
     <div v-if="show">
+      <audio src="@/assets/music/audio.mp3" autoplay loop></audio>
       <div class="box" v-for="(item, index) in imgLength" :key="item" :style="computedStyle(item)">
         <img :style="{ 'animation-duration': computedDuration(item), 'animation-delay': 1 * index + 's' }"
           class="box-img" :src="require(`@/assets/imgs/img2 (${item}).jpg`)" alt="">

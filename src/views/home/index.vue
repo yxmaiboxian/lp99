@@ -1,10 +1,15 @@
 <template>
   <div class="home">
-    <div class="box" v-for="(item) in imgLength" :key="item"
-      :style="{ left: `${Math.floor(Math.random() * 101)}vw`, top: `${Math.floor(Math.random() * 101)}vh` }">
-      <img :style="{ 'animation-duration': computedDuration(item) }" class="box-img"
-        :src="require(`@/assets/imgs/img (${item}).jpg`)" alt="">
+    <div v-if="!show" class="btn" @click="changeShow">
+      全球热恋
     </div>
+    <div v-if="show">
+      <div class="box" v-for="(item, index) in imgLength" :key="item" :style="computedStyle(item)">
+        <img :style="{ 'animation-duration': computedDuration(item), 'animation-delay': 0.7 * index + 's' }"
+          class="box-img" :src="require(`@/assets/imgs/img (${item}).jpg`)" alt="">
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -13,20 +18,38 @@ export default {
   name: 'Home',
   data() {
     return {
-      imgLength: 35
+      imgLength: 100,
+      show: false
     }
   },
   computed: {
     computedDuration() {
       return (item) => {
         let flag = Math.random()
-        let num = 2
+        let num = 0.4
         if (flag > 0.3) {
-          num = flag * 10
+          num = flag * 4
         }
         return num + 's'
       }
 
+    },
+    computedStyle() {
+      return (item) => {
+        let left = `${Math.floor(Math.random() * 101)}`
+        let top = `${Math.floor(Math.random() * 101)}`
+        return {
+          left: `${left}%`,
+          top: `${top}%`,
+          transform: `translate(-${left}%, -${top}%)`
+        }
+      }
+
+    }
+  },
+  methods:{
+    changeShow(){
+      this.show=true
     }
   }
 }
@@ -37,38 +60,74 @@ export default {
   @keyframes myAnimation {
     0% {
       /* 起始状态 */
-      transform: scale(.2);
-      opacity: 1
+      transform: scale(.1);
     }
 
-    50% {
-      /* 中间状态 */
-      transform: scale(2.5) translateZ(500px);
-      opacity: 0.8
+    70% {
+      opacity: 0.9
     }
-    80% {
-      opacity: 0.7
-    }
+
     100% {
       /* 结束状态 */
-      transform: scale(1);
-      opacity: 0
+      transform: scale(1) translateZ(500px);
+      opacity: 1
     }
   }
 
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  position: relative;
   overflow: hidden;
-  transform-style:preserve-3d;
 
   .box {
-    position: absolute;
+    position: fixed;
+    transform-style: preserve-3d;
+    height: 200px;
 
     &-img {
-      width: 80px;
-      animation: myAnimation 1s infinite;
-      ;
+      opacity: 0;
+      height: 100%;
+      animation: myAnimation 1s forwards;
+    }
+  }
+
+  .btn {
+    width: 200px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 30px;
+    text-align: center;
+    color: pink;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: black;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('@/assets/imgs/img (7).jpg');
+      filter: blur(1px);
+      background-position: center center;
+      background-size: cover;
+
+    }
+
+    &::after {
+      content: '全球热恋';
+      position: absolute;
+      font-size: 34px;
+      // font-weight: 700;
+      left: 50%;
+      top: 50%;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
     }
   }
 }
